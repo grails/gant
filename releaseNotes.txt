@@ -2,9 +2,18 @@
 ------
 
 Various minor bug fixes and refactorings, including switching to Groovy 1.7.1 as the main version of Groovy,
-JUnit 4.8.1 as the unit test framework, and Ant 1.8.0 as the principal version of Ant used.
+JUnit 4.8.1 as the unit test framework, and Ant 1.8.0 as the principal version of Ant used.  A build for
+Grovy 1.6.8 is also part of this release.
 
-Maven and Gant builds removed in favour of focusing solely on Gradle as the build for the Gant project.
+Maven and Gant builds removed in favour of focusing solely on Gradle as the build for the Gant project.  NB
+The Gant Ant task tests do not pass using Gradle but they do using Eclipse or IntelliJ IDEA.  A release has
+been made despite this in order to progress the Grails 1.3 release process.
+
+Jeff Brown's changes to make logging of entry and exit to the targets asymmetric.  This was requested for
+Grails 1.3 and no objections were raised by the community.  The mechanism of implementation probably needs
+refactoring to make it more sophisticated.  Technically this is probably a breaking change and so should
+perhaps have caused a 1.10.0 but everything else is just minor bug fixes and so it didn't seem appropriate
+to make a new minor release.
 
 
 1.9.1
