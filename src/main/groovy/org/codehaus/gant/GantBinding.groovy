@@ -1,6 +1,6 @@
 //  Gant -- A Groovy way of scripting Ant tasks.
 //
-//  Copyright © 2008-9 Russel Winder
+//  Copyright © 2008-10 Russel Winder
 //
 //  Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in
 //  compliance with the License. You may obtain a copy of the License at
@@ -153,8 +153,16 @@ public class GantBinding extends Binding implements Cloneable {
         catch ( MissingPropertyException mpe ) { /* Intentionally empty */ }
         if ( targetDescription ) { targetDescriptions.put ( targetName , targetDescription ) }
         closure.metaClass = new GantMetaClass ( closure.metaClass , owner )
-        if ( ! targetMap.containsKey ( 'prehook' ) ) { targetMap.prehook = [ { -> owner.ant.project.log ( targetName + ':' ) } ] }
-        if ( ! targetMap.containsKey ( 'posthook' ) ) { targetMap.posthook = [ { -> owner.ant.project.log ( '------ ' + targetName ) } ] }
+        if ( ! targetMap.containsKey ( 'prehook' ) ) { targetMap.prehook = [ { -> 
+            if ( GantState.verbosity > GantState.WARNINGS_AND_ERRORS ) {
+                owner.ant.project.log ( targetName + ':' ) 
+            }
+        } ] }
+        if ( ! targetMap.containsKey ( 'posthook' ) ) { targetMap.posthook = [ { -> 
+            if ( GantState.verbosity > GantState.NORMAL ) {
+                owner.ant.project.log ( '------ ' + targetName ) 
+            }
+        } ] }
         if ( targetMap.containsKey ( 'addprehook' ) ) {
           if ( targetMap.prehook instanceof Closure ) { targetMap.prehook = [ targetMap.prehook ] }
           if ( targetMap.addprehook instanceof List ) { targetMap.prehook += targetMap.addprehook }

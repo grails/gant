@@ -38,7 +38,7 @@ target ( name : "''' + targetName + '''" , prehook : flob ) { println ( "''' + t
 '''
     assertEquals ( 0 , processCmdLineTargets ( targetName ) )
     assertEquals ( '' , error )
-    assertEquals ( flobString + '\n' + targetString + '\n' + exitMarker + targetName + '\n' , output )
+    assertEquals ( flobString + '\n' + targetString + '\n' , output )
   }
   void testDefinePrehookList ( ) {
     script = '''
@@ -47,7 +47,7 @@ target ( name : "''' + targetName + '''" , prehook : [ flob ] ) { println ( "'''
 '''
     assertEquals ( 0 , processCmdLineTargets ( targetName ) )
     assertEquals ( '' , error )
-    assertEquals ( flobString + '\n' + targetString + '\n' + exitMarker + targetName + '\n' , output )
+    assertEquals ( flobString + '\n' + targetString + '\n' , output )
   }
   void testDefinePosthookScalar ( ) {
     script = '''
@@ -120,7 +120,7 @@ target ( name : "''' + targetName + '''" , prehook : flob ) { println ( "''' + t
 '''
     assertEquals ( 0 , processCmdLineTargets ( targetName ) )
     assertEquals ( notAClosureOrListErrorMessage ( 'Target prehook' ) , error )
-    assertEquals ( targetString + '\n' + exitMarker + targetName + '\n' , output )
+    assertEquals ( targetString + '\n' , output )
   }
 void testPrehookListWrongTypeError ( ) {
     script = '''
@@ -129,7 +129,7 @@ target ( name : "''' + targetName + '''" , prehook : [ flob ] ) { println ( "'''
 '''
     assertEquals ( 0 , processCmdLineTargets ( targetName ) )
     assertEquals ( listItemNotAClosureErrorMessage ( 'Target prehook' ) , error )
-    assertEquals ( targetString + '\n' + exitMarker + targetName + '\n' , output )
+    assertEquals ( targetString + '\n' , output )
   }
   void testPosthookScalarWrongTypeError ( ) {
     script = '''

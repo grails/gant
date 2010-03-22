@@ -30,7 +30,7 @@ final class Maven_Test extends GantTestCase {
 includeTargets << gant.targets.Maven
 """
     assertEquals ( 0 , processCmdLineTargets ( 'initialize' ) )
-    assertEquals ( 'initialize:\n' + exitMarker + 'initialize\n' , output )
+    assertEquals ( 'initialize:\n', output )
     assertEquals ( '' , error )
   }
   void testCompileTargetInDirectoryOtherThanTheCurrentBuildDirectory ( ) {

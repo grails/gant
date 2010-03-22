@@ -172,6 +172,6 @@ public abstract class GantTestCase extends GroovyTestCase {
   protected String getError ( ) { return error.toString ( ).replace ( "\r" , "" ) ; }
   protected String escapeWindowsPath ( final String path ) { return isWindows ? path.replace ( "\\" ,  "\\\\" ) : path ; }
   protected String resultString ( final String targetName , final String result ) {
-    return targetName + ":\n" + result + exitMarker + targetName + '\n' ;
+    return targetName + ":\n" + result ;
   }
 }

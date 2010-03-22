@@ -39,7 +39,7 @@ import org.apache.tools.ant.util.StringUtils ;
  *  @author Russel Winder
  */
 public class Gant_Test extends TestCase {
-  private final String endOfTargetMarker = "------ " ;
+  //private final String endOfTargetMarker = "------ " ; // Never read post Jeff's changes for Grails 1.3
   private final String separator = System.getProperty ( "file.separator" ) ;
   private final boolean isWindows = System.getProperty ( "os.name" ).startsWith ( "Windows" ) ;
   private final String locationPrefix = ( "Gradle".equals ( System.getProperty ( "buildFrameworkIdentifier" ) ) ? ".." + separator : "" ) ;
@@ -249,7 +249,7 @@ public class Gant_Test extends TestCase {
   public void testRunningAntFromShellSuccessful ( ) {
     final List<String> result = runAnt ( antFile.getPath ( ) , null , 0 , true ) ;
     assert result.size ( ) == 2 ;
-    assertEquals ( createBaseMessage ( ) + "test:\n" + endOfTargetMarker + "test\n\nBUILD SUCCESSFUL\n\n", trimTimeFromSuccessfulBuild ( result.get ( 0 ) ) ) ;
+    assertEquals ( createBaseMessage ( ) + "test:\n" + "\nBUILD SUCCESSFUL\n\n", trimTimeFromSuccessfulBuild ( result.get ( 0 ) ) ) ;
     assertEquals ( "" , result.get ( 1 ) ) ;
   }
   /*
@@ -290,7 +290,7 @@ public class Gant_Test extends TestCase {
     //
     sb.append ( System.getProperty ( "user.dir" ) ) ;
     //sb.append ( absolutePath ) ;
-    sb.append ( "\n   [groovy] " + endOfTargetMarker + "default\n   [groovy] \n\nBUILD SUCCESSFUL\n\n" ) ;
+    sb.append ("\n\nBUILD SUCCESSFUL\n\n" ) ;
     final List<String> result = runAnt ( basedirAntFilePath , target , 0 , true ) ;
     assert result.size ( ) == 2 ;
     assertEquals ( sb.toString ( ) , trimTimeFromSuccessfulBuild ( result.get ( 0 ) ) ) ;
@@ -309,7 +309,7 @@ public class Gant_Test extends TestCase {
     //
     sb.append ( "\ndefault:\nbasedir::gant basedir=" ) ;
     sb.append ( absolutePath ) ;
-    sb.append ( "\n" + endOfTargetMarker + "default\n\nBUILD SUCCESSFUL\n\n" ) ;
+    sb.append ("\n\nBUILD SUCCESSFUL\n\n" ) ;
     final List<String> result = runAnt ( basedirAntFilePath , target , 0 , true ) ;
     assert result.size ( ) == 2 ;
     assertEquals ( sb.toString ( ) , trimTimeFromSuccessfulBuild ( result.get ( 0 ) ) ) ;
@@ -321,7 +321,7 @@ public class Gant_Test extends TestCase {
     sb.append ( createMessageStart ( target , "Gant" , false ) ) ;
     sb.append ( "default:\n     [gant] basedir::gant basedir=" ) ;
     sb.append ( absolutePath ) ;
-    sb.append ( "\n" + endOfTargetMarker + "default\n\nBUILD SUCCESSFUL\n\n" ) ;
+    sb.append ( "\n\nBUILD SUCCESSFUL\n\n" ) ;
     final List<String> result = runAnt ( basedirAntFilePath , target , 0 , true ) ;
     assert result.size ( ) == 2 ;
     assertEquals ( sb.toString ( ) , trimTimeFromSuccessfulBuild ( result.get ( 0 ) ) ) ;
@@ -337,7 +337,7 @@ public class Gant_Test extends TestCase {
     sb.append ( antFilePath ) ;
     sb.append ( "\n\n" ) ;
     sb.append ( commonTargetsList ) ;
-    sb.append ( "default:\ndefault:\n     [gant] From println.\n     [gant] On standard error.\n     [echo] From ant.echo.\n" + endOfTargetMarker + "default\n\nBUILD SUCCESSFUL\n\n" ) ;
+    sb.append ( "default:\ndefault:\n     [gant] From println.\n     [gant] On standard error.\n     [echo] From ant.echo.\n\nBUILD SUCCESSFUL\n\n" ) ;
     final List<String> result = runAnt ( antFilePath , null , 0 , true ) ;
     assert result.size ( ) == 2 ;
     assertEquals ( sb.toString ( ) , trimTimeFromSuccessfulBuild ( result.get ( 0 ) ) ) ;
@@ -391,8 +391,8 @@ public class Gant_Test extends TestCase {
     final List<String> result = runAnt ( antFile.getPath ( ) , "gantTestInheritAll" , 0 , true ) ;
     @SuppressWarnings("unchecked") List<String> output = StringUtils.lineSplit ( result.get ( 0 ) ) ;
     assertEquals ( "     [echo] ${gant.test.inheritAll}" , output.get ( 8 ) ) ;
-    assertEquals ( "     [echo] ${gant.test.inheritAll}" , output.get ( 11 ) ) ;
-    assertEquals ( "     [echo] gantInheritAllWorks" , output.get ( 14 ) ) ;
+    assertEquals ( "     [echo] ${gant.test.inheritAll}" , output.get ( 10 ) ) ;
+    assertEquals ( "     [echo] gantInheritAllWorks" , output.get ( 12 ) ) ;
   }
 
   //  For dealing with GANT-111 -- thanks to Eric Van Dewoestine for providing the original --
