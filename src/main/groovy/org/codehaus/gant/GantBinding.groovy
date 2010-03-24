@@ -154,7 +154,7 @@ public class GantBinding extends Binding implements Cloneable {
         if ( targetDescription ) { targetDescriptions.put ( targetName , targetDescription ) }
         closure.metaClass = new GantMetaClass ( closure.metaClass , owner )
         if ( ! targetMap.containsKey ( 'prehook' ) ) { targetMap.prehook = [ { -> 
-            if ( GantState.verbosity > GantState.WARNINGS_AND_ERRORS ) {
+            if ( GantState.verbosity > GantState.NORMAL ) {
                 owner.ant.project.log ( targetName + ':' ) 
             }
         } ] }
